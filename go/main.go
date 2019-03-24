@@ -258,50 +258,50 @@ func GetMaxSum(arr []int) int {
 	tmp := 0
 	maxSum := 0
 	for i := 0; i < len(arr); i++ {
-	 tmp += arr[i]
-	 if tmp < 0 {
-		tmp = 0
-	 } else if tmp > maxSum {
-		maxSum = tmp
-	 }
+		tmp += arr[i]
+		if tmp < 0 {
+			tmp = 0
+		} else if tmp > maxSum {
+			maxSum = tmp
+		}
 	}
 	return maxSum
- }
- 
- func BuildDictTree(arr []string) map[string]interface{} {
+}
+
+func BuildDictTree(arr []string) map[string]interface{} {
 	tree := map[string]interface{}{}
 	for _, chars := range arr {
-	 curr := tree
-	 for _, c := range chars {
-		cs := string(c)
-		if v, exist := curr[cs]; exist {
-		 curr = v.(map[string]interface{})
-		} else {
-		 curr[cs] = map[string]interface{}{}
-		 curr = curr[cs].(map[string]interface{})
+		curr := tree
+		for _, c := range chars {
+			cs := string(c)
+			if v, exist := curr[cs]; exist {
+				curr = v.(map[string]interface{})
+			} else {
+				curr[cs] = map[string]interface{}{}
+				curr = curr[cs].(map[string]interface{})
+			}
 		}
-	 }
-	 curr["value"] = 1
+		curr["value"] = 1
 	}
 	return tree
- }
- 
- /**
- 3道算法题：动态规划、字典树、拆分，只用其中两道即可
- 算法题先说明思路，然后是实现，可以先在草稿上画一下
- 算法延伸：
- 1. 动态规划状态转移方程、最优子结构；
- 2. 树形结构构建、前中后序遍历；
- 3.
- 
- 网络相关：
- http持久连接如何实现，同一tcp连接上的不同http请求如何区分，静态动态内容长度传输、分块传输，部分请求
- 
- 系统设计：
- 1. 计数器
- 2. 限流器
- 
- */
+}
+
+/**
+3道算法题：动态规划、字典树、拆分，只用其中两道即可
+算法题先说明思路，然后是实现，可以先在草稿上画一下
+算法延伸：
+1. 动态规划状态转移方程、最优子结构；
+2. 树形结构构建、前中后序遍历；
+3.
+
+网络相关：
+http持久连接如何实现，同一tcp连接上的不同http请求如何区分，静态动态内容长度传输、分块传输，部分请求
+
+系统设计：
+1. 计数器
+2. 限流器
+
+*/
 
 func main() {
 	fmt.Println("===== start =====")
