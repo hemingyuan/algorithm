@@ -266,6 +266,7 @@ func main() {
 	// fmt.Println(longestPalindrome(s))
 	// fmt.Println(BubbleSort([]int{1, 9, 4, 3, 8}))
 	// fmt.Println(SelectSort([]int{1, 9, 4, 3, 8}))
+	
 	obj := Constructor(1)
 	obj.Put(2, 22)
 	fmt.Println(obj.Get(2)) // 返回  22
@@ -273,6 +274,5 @@ func main() {
 	fmt.Println(obj.Get(2)) // 返回 -1 (未找到)
 	fmt.Println(obj.Get(3)) // 返回 33
 
-	// [1],[2,1],[2],[3,2],[2],[3]]
 	fmt.Println("===== end =====")
 }

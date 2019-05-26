@@ -262,19 +262,23 @@ func (dll *DualLinkList) Shift() *DualLinkListNode {
 	return node
 }
 
-// 根据取值删除
+// DeleteByValue 根据取值删除
 func (dll *DualLinkList) DeleteByValue(value int) *DualLinkListNode {
 	for cur := dll.head; cur != nil; cur = cur.next {
 		if value == cur.value {
 			if cur.pre == nil {
 				dll.head = dll.head.next
-				dll.head.pre = nil
+				if dll.head != nil {
+					dll.head.pre = nil
+				}
 			} else {
 				cur.pre.next = cur.next
 			}
 			if cur.next == nil {
 				dll.tail = dll.tail.pre
-				dll.tail.next = nil
+				if dll.tail != nil {
+					dll.tail.next = nil
+				}
 			} else {
 				cur.next.pre = cur.pre
 			}
