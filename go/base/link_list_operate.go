@@ -1,6 +1,7 @@
 package base
 
 import (
+	"container/heap"
 	"errors"
 )
 
@@ -128,4 +129,55 @@ func GetRevKthFromLinkList(head *LinkListNode, k int) (int, error) {
 		return ret, nil
 	}
 	return 0, errors.New("not_found")
+}
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+type srHeap []*ListNode
+
+func (h *srHeap) Less(i, j int) bool {
+	return (*h)[i].Val < (*h)[j].Val
+}
+
+func (h *srHeap) Swap(i, j int) {
+	(*h)[i], (*h)[j] = (*h)[j], (*h)[i]
+}
+
+func (h *srHeap) Len() int {
+	return len(*h)
+}
+
+func (h *srHeap) Pop() (v interface{}) {
+	*h, v = (*h)[:h.Len()-1], (*h)[h.Len()-1]
+	return
+}
+
+func (h *srHeap) Push(v interface{}) {
+	*h = append(*h, v.(*ListNode))
+}
+
+// MergeKLists 合并k个有序链表
+// 1. 采用小根堆存储每个链表的队头，每次从小根堆头部取节点加入返回链表中，并将该节点的Next放回小根堆中
+// 2. 也可以使用分治法，将链表按照两两划分合并，然后递归合并到只剩一个链表
+func MergeKLists(lists []*ListNode) *ListNode {
+	heads := make(srHeap, 0)
+	for _, h := range lists {
+		if h != nil {
+			heads = append(heads, h)
+		}
+	}
+	heap.Init(&heads)
+	dummy := &ListNode{}
+	c := dummy
+	for len(heads) > 0 {
+		c.Next = heap.Pop(&heads).(*ListNode)
+		c = c.Next
+		if c.Next != nil {
+			heap.Push(&heads, c.Next)
+		}
+	}
+	return dummy.Next
 }

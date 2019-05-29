@@ -24,11 +24,11 @@ func printHeap(arr []int) {
 	}
 }
 
-func TestBigHeap(t *testing.T) {
+func TestSmallRootHeap(t *testing.T) {
 	for i := 0; i < 2; i++ {
 		arr := makeRandomArray(7)
 		fmt.Printf("origin arr=%v\n", arr)
-		NewBigHeap(arr)
+		NewSmallRootHeap(arr)
 		fmt.Printf("heap arr=%v\n", arr)
 		printHeap(arr)
 	}
